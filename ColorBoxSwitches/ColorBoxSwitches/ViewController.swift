@@ -19,7 +19,10 @@ class ViewController: UIViewController {
     func setupUI(){
         view.backgroundColor = UIColor.lightGray
 
-        let redSwitch = UISwitch(frame: CGRect(x: 150, y: 50, width: 0, height: 0))
+        //             let redSwitch = UISwitch(frame: CGRect(x: 150, y: 50, width: 0, height: 0))
+        
+        
+        let redSwitch = UISwitch(frame: CGRect(x: self.view.frame.width / 2, y: 50, width: 0, height: 0))
         redSwitch.tintColor = UIColor.red
         redSwitch.onTintColor = UIColor.red
         redSwitch.isOn = false
@@ -69,3 +72,8 @@ class ViewController: UIViewController {
     }
 }
 
+/*
+ Lines 14-17
+    are not needed to appear on screen & not needed to trigger action with ".addTarget"
+    they are needed to give these UIElement variables scope so other functions can access.  Example the r,g,b values pulled within setCombinationSquare
+ */
