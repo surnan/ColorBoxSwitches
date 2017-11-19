@@ -16,38 +16,31 @@ class ViewController: UIViewController {
     var blueSwitch: UISwitch!
     var combinationSquare: UIView!
 
+    func initColorSwith(mySwitch: UISwitch!, color: UIColor, x: CGFloat, y: CGFloat)-> UISwitch {
+        let mySwitch = UISwitch(frame: CGRect(x: x, y: y, width: 0, height: 0))
+        mySwitch.tintColor = color
+        mySwitch.onTintColor = color
+        mySwitch.isOn = false
+        self.view.addSubview(mySwitch)
+        mySwitch.addTarget(self, action: #selector(self.switchValueDidChange), for: .valueChanged)
+        return mySwitch
+    }
+    
+    func initCombinationSquare(mySquare: UIView!, x: CGFloat, y: CGFloat){
+        
+    }
+    
     func setupUI(){
+        let centerX = self.view.frame.width / 2
+        let yCoord:CGFloat = 50                   //Multiplied to generate y-coordinate for UI elements
+        
         view.backgroundColor = UIColor.lightGray
+        self.redSwitch = initColorSwith(mySwitch: redSwitch, color: UIColor.red, x: centerX, y: yCoord)
+        self.greenSwitch = initColorSwith(mySwitch: greenSwitch, color: UIColor.green, x: centerX, y: yCoord * 2)
+        self.blueSwitch = initColorSwith(mySwitch: blueSwitch, color: UIColor.blue, x: centerX, y: yCoord * 3)
 
-        //             let redSwitch = UISwitch(frame: CGRect(x: 150, y: 50, width: 0, height: 0))
-        
-        
-        let redSwitch = UISwitch(frame: CGRect(x: self.view.frame.width / 2, y: 50, width: 0, height: 0))
-        redSwitch.tintColor = UIColor.red
-        redSwitch.onTintColor = UIColor.red
-        redSwitch.isOn = false
-        self.view.addSubview(redSwitch)
-        self.redSwitch = redSwitch
-        redSwitch.addTarget(self, action: #selector(self.switchValueDidChange), for: .valueChanged)
-  
-        let greenSwitch = UISwitch(frame: CGRect(x: 150, y: 100, width: 0, height: 0))
-        greenSwitch.tintColor = UIColor.green
-        greenSwitch.onTintColor = UIColor.green
-        greenSwitch.isOn = false
-        self.view.addSubview(greenSwitch)
-        self.greenSwitch = greenSwitch
-        greenSwitch.addTarget(self, action: #selector(self.switchValueDidChange), for: .valueChanged)
-
-        let blueSwitch = UISwitch(frame: CGRect(x: 150, y: 150, width: 0, height: 0))
-        blueSwitch.tintColor = UIColor.blue
-        blueSwitch.onTintColor = UIColor.blue
-        blueSwitch.isOn = false
-        self.view.addSubview(blueSwitch)
-        self.blueSwitch = blueSwitch
-        blueSwitch.addTarget(self, action: #selector(self.switchValueDidChange), for: .valueChanged)
-
-        let combinationSquare = UIView(frame: CGRect(x: 100, y: 250, width: 200, height: 200))
-        combinationSquare.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 1)
+        let combinationSquare = UIView(frame: CGRect(x: (centerX / 2) - 100, y: yCoord * 4, width: 200, height: 200))
+        combinationSquare.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 1) //All switches start "OFF" when program starts
         self.combinationSquare = combinationSquare
         self.view.addSubview(combinationSquare)
     }
@@ -73,7 +66,11 @@ class ViewController: UIViewController {
 }
 
 /*
- Lines 14-17
+ Lines 14-17 (UISwitch!) declarations
     are not needed to appear on screen & not needed to trigger action with ".addTarget"
     they are needed to give these UIElement variables scope so other functions can access.  Example the r,g,b values pulled within setCombinationSquare
+ 
+func setupUI programmatically setting coordinates
+    frame is built-in value
+    center is also built-in value but it wasn't used in this program
  */
